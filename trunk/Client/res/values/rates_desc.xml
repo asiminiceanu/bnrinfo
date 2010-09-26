@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="desc_AUD">Australian dollar</string>
+	<string name="desc_BGN">Bulgarian lev</string>
+	<string name="desc_CAD">Canadian dollar</string>
+	<string name="desc_CHF">Swiss franc</string>
+	<string name="desc_CZK">Czech koruna</string>
+	<string name="desc_DKK">Danish krone</string>
+	<string name="desc_EGP">Egyptian pound</string>
+	<string name="desc_EUR">Euro</string>
+	<string name="desc_GBP">Pound sterling</string>
+	<string name="desc_HUF">Hungarian forint</string>
+	<string name="desc_JPY">Japanese yen</string>
+	<string name="desc_MDL">Moldavian leu</string>
+	<string name="desc_NOK">Norwegian krone</string>
+	<string name="desc_PLN">Polish zloty</string>
+	<string name="desc_RUB">Russian rouble</string>
+	<string name="desc_SEK">Swedish krona</string>
+	<string name="desc_TRY">Turkish lira</string>
+	<string name="desc_USD">US dollar</string>
+	<string name="desc_ZAR">South African rand</string>
+	<string name="desc_BRL">Brazilian real</string>
+	<string name="desc_CNY">Chinese renminbi</string>
+	<string name="desc_INR">Indian rupee</string>
+	<string name="desc_KRW">South Korean wons</string>
+	<string name="desc_MXN">Mexican peso</string>
+	<string name="desc_NZD">New Zealand dollar</string>
+	<string name="desc_RSD">Serbian dinar</string>
+	<string name="desc_UAH">Ukrainian hryvnia</string>
+	<string name="desc_AED">United Arab Emirates dirham</string>
+	<string name="desc_XAU">Gold Price per Gram</string>
+	<string name="desc_XDR">International Monetary Fund</string>
+</resources>
