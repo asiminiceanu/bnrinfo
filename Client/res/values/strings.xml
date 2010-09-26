@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="serverErr">Oops... \nCannot get the exchange rates!</string>
+    <string name="hello"></string>
+    <string name="app_name">BNR Info</string>    
+    <string name="app_about">The entire content of the exchange rates is the copyright of the National Bank of Romania.\nTo go the official web site please use the Web option in the application menu.\n\nFor any information of problems please contact me at asiminiceanu@hotmail.com or use the Feedback button.</string> 
+    <string name="app_about_button_ok">OK</string> 
+    <string name="app_about_button_feedback">Feedback</string>
+    <string name="email_address">asiminiceanu@hotmail.com</string>
+    <string name="email_subject">[BNR Info] Feedback</string>
+    <string name="email_select_app">Select email application</string>
+    <string name="about">About</string>   
+    <string name="exit">Exit</string>
+    <string name="bnr_url">Web</string>
+    <string name="refresh">Refresh</string> 
+    <string name="loading_desc">"Retrieving the exchange rates. Please wait..."</string>
+    <string name="loading_title">"Loading..."</string>
+    <string name="header">Exchange rates from</string>
+</resources>
