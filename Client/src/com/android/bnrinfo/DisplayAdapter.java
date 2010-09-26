@@ -40,7 +40,8 @@ public class DisplayAdapter extends BaseAdapter {
      * 
      * @see android.widget.ListAdapter#getCount()
      */
-    public int getCount() {
+    @Override
+	public int getCount() {
         return BnrInfo.ratesType.size();
     }
 
@@ -52,7 +53,8 @@ public class DisplayAdapter extends BaseAdapter {
      * 
      * @see android.widget.ListAdapter#getItem(int)
      */
-    public Object getItem(int position) {
+    @Override
+	public Object getItem(int position) {
         return position;
     }
 
@@ -61,7 +63,8 @@ public class DisplayAdapter extends BaseAdapter {
      * 
      * @see android.widget.ListAdapter#getItemId(int)
      */
-    public long getItemId(int position) {
+    @Override
+	public long getItemId(int position) {
         return position;
     }
 
@@ -71,7 +74,8 @@ public class DisplayAdapter extends BaseAdapter {
      * @see android.widget.ListAdapter#getView(int, android.view.View,
      *      android.view.ViewGroup)
      */
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+	public View getView(int position, View convertView, ViewGroup parent) {
         // A ViewHolder keeps references to children views to avoid unnecessary
         // calls
         // to findViewById() on each row.
