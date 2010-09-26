@@ -102,7 +102,8 @@ public class BnrInfo extends Activity {
          * 
          * @see java.lang.Runnable#run()
          */
-        public void run() {
+        @Override
+		public void run() {
             updateUi();
         }
     };
@@ -215,7 +216,8 @@ public class BnrInfo extends Activity {
             AlertDialog errorDialog = new AlertDialog.Builder(this).setIcon(R.drawable.chart)
                     .setTitle(getString(R.string.app_name) + " " + appVersion).setMessage(errorMessage.toString())
                     .setNeutralButton(R.string.app_about_button_ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
+                        @Override
+						public void onClick(DialogInterface dialog, int whichButton) {
                             dialog.dismiss();
                         }
                     }).create();
@@ -249,11 +251,13 @@ public class BnrInfo extends Activity {
         AlertDialog aboutDialog = new AlertDialog.Builder(this).setIcon(R.drawable.chart)
                 .setTitle(getString(R.string.app_name) + " " + appVersion).setMessage(R.string.app_about)
                 .setPositiveButton(R.string.app_about_button_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    @Override
+					public void onClick(DialogInterface dialog, int whichButton) {
                         dialog.dismiss();
                     }
                 }).setNegativeButton(R.string.app_about_button_feedback, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    @Override
+					public void onClick(DialogInterface dialog, int whichButton) {
                         // Send the email with the feedback
                         Intent i = new Intent(Intent.ACTION_SEND);
 
@@ -300,7 +304,8 @@ public class BnrInfo extends Activity {
              * 
              * @see java.lang.Runnable#run()
              */
-            public void run() {
+            @Override
+			public void run() {
                 executeRequest();
                 parseResponse();
                 dialog.dismiss();
