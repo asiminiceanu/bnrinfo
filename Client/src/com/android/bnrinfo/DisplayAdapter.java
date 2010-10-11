@@ -44,7 +44,6 @@ public class DisplayAdapter extends BaseAdapter {
      */
     @Override
 	public int getCount() {
-        //return BnrInfo.ratesType.size();
     	return BnrInfo.currencies.size();
     }
 
