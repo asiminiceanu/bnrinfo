@@ -1,5 +1,7 @@
 package com.android.bnrinfo;
 
+import java.util.Map;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,7 +44,8 @@ public class DisplayAdapter extends BaseAdapter {
      */
     @Override
 	public int getCount() {
-        return BnrInfo.ratesType.size();
+        //return BnrInfo.ratesType.size();
+    	return BnrInfo.currencies.size();
     }
 
     /**
@@ -107,10 +110,12 @@ public class DisplayAdapter extends BaseAdapter {
         }
 
         // Bind the data efficiently with the holder.
-        holder.rateType.setText(BnrInfo.ratesMultiplier.get(position) + " " + BnrInfo.ratesType.get(position));
-        holder.rateValue.setText(BnrInfo.ratesValues.get(position) + " RON");
+        Map<String, String> item = BnrInfo.currencies.get(position);
 
-        String diffText = new String(BnrInfo.ratesDiff.get(position));
+        holder.rateType.setText(item.get("multiplier") + " " + item.get("currency"));
+        holder.rateValue.setText(item.get("value") + " RON");
+
+        String diffText = new String(item.get("diff"));
         holder.rateDiff.setText(diffText.toString());
 
         if (diffText.startsWith("+")) {
@@ -120,11 +125,11 @@ public class DisplayAdapter extends BaseAdapter {
         }
 
         holder.rateDesc.setText(mcontext.getString(mcontext.getResources().getIdentifier(
-                "desc_" + BnrInfo.ratesType.get(position), "string", "com.android.bnrinfo")));
+                "desc_" + item.get("currency"), "string", "com.android.bnrinfo")));
 
         Bitmap bm = BitmapFactory.decodeResource(
                 mcontext.getResources(),
-                mcontext.getResources().getIdentifier("ico_" + BnrInfo.ratesType.get(position).toLowerCase(),
+                mcontext.getResources().getIdentifier("ico_" + item.get("currency").toLowerCase(),
                         "drawable", "com.android.bnrinfo"));
         holder.icon.setImageBitmap(bm);
 

@@ -2,7 +2,9 @@ package com.android.bnrinfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -61,23 +63,8 @@ public class BnrInfo extends Activity {
     /*
      * The list of rates types
      */
-    static ArrayList<String> ratesType = new ArrayList<String>();
-
-    /*
-     * The list of rates multiplier
-     */
-    static ArrayList<String> ratesMultiplier = new ArrayList<String>();
-
-    /*
-     * The list of rates values
-     */
-    static ArrayList<String> ratesValues = new ArrayList<String>();
-
-    /*
-     * The list of rates diff
-     */
-    static ArrayList<String> ratesDiff = new ArrayList<String>();
-
+    static Map<Integer, Map<String, String>> currencies = new HashMap<Integer, Map<String, String>>();
+   
     /*
      * The ListView in main layout
      */
@@ -118,42 +105,13 @@ public class BnrInfo extends Activity {
         super.onCreate(savedInstanceState);
 
         // Check if already launched the application
-        if (ratesType.size() > 0) {
+        if (currencies.size() > 0) {
             updateUi();
             return;
         }
 
         // Get the data
         getGoodies();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save UI state changes to the savedInstanceState.
-        // This bundle will be passed to onCreate if the process is
-        // killed and restarted.
-        savedInstanceState.putStringArrayList("ratesType", ratesType);
-        savedInstanceState.putStringArrayList("ratesDiff", ratesDiff);
-        savedInstanceState.putStringArrayList("ratesMultiplier", ratesMultiplier);
-        savedInstanceState.putStringArrayList("ratesValues", ratesValues);
-        savedInstanceState.putString("appVersion", appVersion);
-        savedInstanceState.putString("sendingDate", sendingDate);
-
-        // etc.
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        ratesType = savedInstanceState.getStringArrayList("ratesType");
-        ratesDiff = savedInstanceState.getStringArrayList("ratesDiff");
-        ratesMultiplier = savedInstanceState.getStringArrayList("ratesMultiplier");
-        ratesValues = savedInstanceState.getStringArrayList("ratesValues");
-        appVersion = savedInstanceState.getString("appVersion");
-        sendingDate = savedInstanceState.getString("sendingDate");
     }
 
     /*
@@ -196,10 +154,14 @@ public class BnrInfo extends Activity {
             sendingDate = new String(jObject.getString("SendingDate").toString());
 
             for (int i = 0; i < ratesArray.length(); i++) {
-                ratesType.add(ratesArray.getJSONObject(i).getString("currency").toString());
-                ratesMultiplier.add(ratesArray.getJSONObject(i).getString("multiplier").toString());
-                ratesValues.add(ratesArray.getJSONObject(i).getString("rate").toString());
-                ratesDiff.add(ratesArray.getJSONObject(i).getString("diff").toString());
+            	Map<String, String> rateProps = new HashMap<String, String>(); 
+            	
+            	rateProps.put("multiplier", ratesArray.getJSONObject(i).getString("multiplier").toString());
+            	rateProps.put("diff", ratesArray.getJSONObject(i).getString("diff").toString());
+            	rateProps.put("value", ratesArray.getJSONObject(i).getString("rate").toString());
+            	rateProps.put("currency", ratesArray.getJSONObject(i).getString("currency").toString());
+            	
+            	currencies.put(i, rateProps);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -213,7 +175,7 @@ public class BnrInfo extends Activity {
     protected void updateUi() {
 
         if (errorMessage.compareTo(new String(getString(R.string.serverErr))) == 0) {
-            AlertDialog errorDialog = new AlertDialog.Builder(this).setIcon(R.drawable.chart)
+            AlertDialog errorDialog = new AlertDialog.Builder(this).setIcon(R.drawable.logo)
                     .setTitle(getString(R.string.app_name) + " " + appVersion).setMessage(errorMessage.toString())
                     .setNeutralButton(R.string.app_about_button_ok, new DialogInterface.OnClickListener() {
                         @Override
@@ -248,7 +210,7 @@ public class BnrInfo extends Activity {
      * Open the about dialog
      */
     protected void openAbout() {
-        AlertDialog aboutDialog = new AlertDialog.Builder(this).setIcon(R.drawable.chart)
+        AlertDialog aboutDialog = new AlertDialog.Builder(this).setIcon(R.drawable.logo)
                 .setTitle(getString(R.string.app_name) + " " + appVersion).setMessage(R.string.app_about)
                 .setPositiveButton(R.string.app_about_button_ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -277,10 +239,12 @@ public class BnrInfo extends Activity {
      */
     protected void getGoodies() {
         // Reset the stored data
-        ratesType.clear();
+        /*ratesType.clear();
         ratesDiff.clear();
         ratesMultiplier.clear();
         ratesValues.clear();
+        */
+    	currencies.clear();
 
         // Get the app version number and store it
         PackageInfo packageInfo;
